@@ -7,7 +7,7 @@ Before release :
 - Building classification tree with linear classification from list_atr_celebra
 - Training and testing CNN
 
-Playing the game : 
+### Playing the game : 
 - Uploading photo
 - Determining existing features with CNN -> feature vector [1,-1,....,]
 - Searching the classification tree 
@@ -22,7 +22,7 @@ Before release :
 ### Training & Testing 
 - Training and testing CNN
 
-Playing the game : 
+### Playing the game : 
 - Uploading photo
 - Determining existing features with CNN -> feature vector [1,-1,....,]
 - Running KNN on list_atr_celebra with vector
