@@ -1,6 +1,15 @@
 # A game in Python that matches a celebrity's face with yours. 
 Relies on unsupervised machine learning trained using https://www.kaggle.com/datasets/jessicali9530/celeba-dataset (40 features)
 
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+
 ## Game V1 (Classification tree) : 
 Before release : 
 ### Training & Testing 
