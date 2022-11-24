@@ -4,7 +4,7 @@ Relies on unsupervised machine learning trained using https://www.kaggle.com/dat
 
 ```mermaid
 graph TD;
-    A-->B;
+    A-rsdf->B;
     A-->C;
     B-->D;
     C-->D;
