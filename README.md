@@ -2,14 +2,6 @@
 Relies on unsupervised machine learning trained using https://www.kaggle.com/datasets/jessicali9530/celeba-dataset (40 features)
 
 
-```mermaid
-graph TD;
-    A-rsdf->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
-
 ## Game V1 (Classification tree) : 
 Before release : 
 ### Training & Testing 
