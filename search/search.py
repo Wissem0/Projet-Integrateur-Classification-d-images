@@ -19,10 +19,10 @@ def KNN(user_vector:str,k:int):
         k_nearest.sort(key=lambda tup: tup[0])
         if len(k_nearest) > k :
             k_nearest.pop(0)
-    return k_nearest
+    return str(k_nearest)
 
-@app.route("/show")
-def show():
-    return str(DB)
+@app.route("/show/<int:k>")
+def show(k):
+    return str(k)
 
 
