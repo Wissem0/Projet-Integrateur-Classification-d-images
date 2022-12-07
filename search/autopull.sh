@@ -11,21 +11,15 @@ function usage {
 }
 
 function deploy {
-    # Setting up environnement
-    echo "sudo apt-get install git python pip"
-    echo "pip install flask"
-    FLASK_APP=$COMPONENT
-
     # Git Setup & Pull
     mkdir -p ~/service
-    yes | rm -r *
-    cd ~/service
-    git init
-    git config core.sparsecheckout true
-    echo $COMPONENT >> .git/info/sparse-checkout
-    git remote add -f origin https://github.com/$REPO_OWNER/$REPO
-    git pull origin main
-    flask run & export $FLASK_PID=$!
+    cd ~/service && yes | rm -r *
+    cd ~/service && git init
+    cd ~/service && git config core.sparsecheckout true
+    echo $COMPONENT/flask_service >> ~/service/.git/info/sparse-checkout
+    cd ~/service && git remote add -f origin https://github.com/$REPO_OWNER/$REPO
+    cd ~/service && git pull origin main
+    cd ~/service/$COMPONENT/flask_service && flask run & export $FLASK_PID=$!
 }
 
 function update {   :
@@ -37,8 +31,8 @@ function update {   :
     else 
 	    date +"%Y-%m-%d %T : Pulling $N" >> autobuild_log
         kill $FLASK_PID
-        git pull origin main
-        flask run & export $FLASK_PID=$! 
+        cd ~/service/ && git pull origin main
+        cd ~/service/$COMPONENT/flask_service && flask --app search run & export $FLASK_PID=$! 
     fi
 }
 
