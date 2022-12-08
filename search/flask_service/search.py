@@ -21,6 +21,28 @@ def KNN(user_vector:str,k:int):
             k_nearest.pop(0)
     return str(k_nearest)
 
+# Improved version: 
+# - use a heap to store the k nearest neighbors
+# - use a dictionary to store the distance between the user and the vectors
+# - use a set to store the vectors that have been visited
+@app.route("/knn_improved/<user_vector>/<int:k>")
+def KNN_improved(user_vector:str,k:int):
+    k_nearest = []
+    visited = set()
+    distances = {}
+    for vector_id in range(len(DB)) :
+        vector = DB[vector_id]
+        d = hamming_distance(vector,user_vector)
+        distances[vector_id] = d
+        if len(k_nearest) < k :
+            heapq.heappush(k_nearest,(d,vector_id))
+        else :
+            heapq.heappushpop(k_nearest,(d,vector_id))
+    return str(k_nearest)
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8080)
+
 @app.route("/show/<int:k>")
 def show(k):
     return str(k)
