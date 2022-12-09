@@ -1,12 +1,16 @@
+#!/usr/bin/env python3
 from flask import Flask
 import random
+import heapq
 app = Flask(__name__)
-NB_FEATURES = 40
-DB = [''.join(map(str, [random.randint(0, 1) for j in range(NB_FEATURES)])) for k in range(200000)] 
+NB_FEATURES = 5
+DB = [''.join(map(str, [random.randint(0, 1) for j in range(NB_FEATURES)])) for k in range(20000)]
 
 # Returns Hamming distance between two binary numbers
 def hamming_distance(v1:str,v2:str) -> int :
-     return sum([ int(bit) for bit in bin(int(v1,base=2)^int(v2,base=2))[2:]])
+    if len(v1) != len(v2) :
+        raise ValueError("Binary vectors should have same lenght (len(v1)="+str(len(v1))+",len(v2)="+str(len(v2)))
+    return sum([ int(bit) for bit in bin(int(v1,base=2)^int(v2,base=2))[2:]])
 
 # K-Nearest Neighbors
 @app.route("/knn/<user_vector>/<int:k>")
@@ -21,7 +25,7 @@ def KNN(user_vector:str,k:int):
             k_nearest.pop(0)
     return str(k_nearest)
 
-# Improved version: 
+# Improved version:
 # - use a heap to store the k nearest neighbors
 # - use a dictionary to store the distance between the user and the vectors
 # - use a set to store the vectors that have been visited
@@ -40,11 +44,10 @@ def KNN_improved(user_vector:str,k:int):
             heapq.heappushpop(k_nearest,(d,vector_id))
     return str(k_nearest)
 
-#if __name__ == "__main__":
-#    app.run(host='0.0.0.0', port=8080)
 
 @app.route("/show/<int:k>")
 def show(k):
     return str(k)
 
-
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8080)
