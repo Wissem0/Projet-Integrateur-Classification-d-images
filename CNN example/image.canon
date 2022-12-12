@@ -1,0 +1,17 @@
+digraph G {
+	graph [concentrate=True, dpi=96, rankdir=TB];
+	node [label="\N", shape=record];
+	1581214552800 [label="input_1|InputLayer"];
+	1581214818704 [label="keras_layer|KerasLayer"];
+	1581214819664 [label="dropout|Dropout"];
+	1581215806752 [label="dense|Dense"];
+	1581465963008 [label="male|Dense"];
+	1581465971872 [label="smiling|Dense"];
+	1581465971536 [label="young|Dense"];
+	1581214552800 -> 1581214818704;
+	1581214818704 -> 1581214819664;
+	1581214819664 -> 1581215806752;
+	1581215806752 -> 1581465963008;
+	1581215806752 -> 1581465971872;
+	1581215806752 -> 1581465971536;
+}
