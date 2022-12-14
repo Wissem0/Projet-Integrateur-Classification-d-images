@@ -1,0 +1,30 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 2rem 1.5rem 2rem;
+    background-color: transparent;
+}
+.title:not(:last-child) {
+    margin-bottom: 2rem;
+}
+body {
+    background: linear-gradient(-42deg, #c33764, #1d2671);
+    background-size: 200% 200%;
+    animation: gradient 15s ease infinite;
+}
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
