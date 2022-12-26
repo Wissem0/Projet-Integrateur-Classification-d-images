@@ -1,31 +1,16 @@
 # A game in Python that matches a celebrity's face with yours. 
 Relies on unsupervised machine learning trained using https://www.kaggle.com/datasets/jessicali9530/celeba-dataset (40 features)
+
 ![Project Architechture Diagram](architechture.drawio.svg)
 
-## Game V1 (Classification tree) : 
+## Sequence of actions : 
 Before release : 
 ### Training & Testing 
-- Building classification tree with linear classification from list_atr_celebra
-- Training and testing CNN
+- Training and testing CNN (Microservice 1)
+- Eventually building search data structure (Microservice 2)
 
 ### Playing the game : 
 - Uploading photo
-- Determining existing features with CNN -> feature vector [1,-1,....,]
-- Searching the classification tree 
-- Score = 100%
-- Searching classification tree to find a matching celebrity
-- IF stuck in search tree change feature in feature vector -> lowers ressemblance score
-- Get a filename and display it with ressemblance score (Ex: 68%)
-
-
-## Game V2 (KNN) : 
-Before release : 
-### Training & Testing 
-- Training and testing CNN
-
-### Playing the game : 
-- Uploading photo
-- Determining existing features with CNN -> feature vector [1,-1,....,]
-- Running KNN on list_atr_celebra with vector
-- Score = ratio between distance to nearest and longest distance
-- Get a filename and display it with ressemblance score (Ex: 68%)
+- Determining existing features with CNN -> user attribute vector [1,-1,....,]
+- Running the search algorithm from list_atr_celebra using user attribute vector. Score = percentage of features that matches the celebrity the user most resembles 
+- Display the face image with ressemblance score (e.g. 68%) and mismatched attributes (e.g. Glasses, Pale Skin)
