@@ -1,4 +1,4 @@
-# A game in Python that matches a celebrity's face with yours. 
+# A web game that matches the user with the celebrity they most resembles. 
 Relies on unsupervised machine learning trained using https://www.kaggle.com/datasets/jessicali9530/celeba-dataset (40 features)
 
 ![Project Architechture Diagram](architechture.drawio.svg)
