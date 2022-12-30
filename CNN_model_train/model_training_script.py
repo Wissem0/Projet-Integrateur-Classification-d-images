@@ -90,7 +90,7 @@ image, Mouth_Slightly_Open, Smiling, Wearing_Lipstick, High_Cheekbones, Male, He
 features = [ Mouth_Slightly_Open, Smiling, Wearing_Lipstick, High_Cheekbones, Male, Heavy_Makeup, Wavy_Hair, Oval_Face, Pointy_Nose, Arched_Eyebrows, Big_Lips, Black_Hair, Big_Nose, Young, Straight_Hair, Brown_Hair, Bags_Under_Eyes, Wearing_Earrings, No_Beard, Bangs, Blond_Hair, Chubby, Bald]
 
 
-normalization_layer = tf.keras.layers.Rescaling(1. / 255)
+normalization_layer = tf.keras.layers.experimental.preprocessing.Rescaling(1. / 255)
 preprocessing_model = tf.keras.Sequential([normalization_layer])
 do_data_augmentation = False
 if do_data_augmentation:
