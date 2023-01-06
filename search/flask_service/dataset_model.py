@@ -1,4 +1,5 @@
 # TODO: Should I do this or not ????
+
 class BinaryAttribute:
     SYMBOLS = ('0', '1')
 

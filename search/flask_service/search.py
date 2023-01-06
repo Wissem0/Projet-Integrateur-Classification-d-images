@@ -11,7 +11,6 @@ SYMBOLS = ('0', '1')
 DB = [''.join(map(str, [SYMBOLS[random.randint(0, 1)] for j in range(NB_FEATURES)])) for k in range(NB_EXAMPLES)]
 
 
-
 # Returns Hamming distance between two binary numbers
 def hamming_distance(v1: str, v2: str) -> int:
     if len(v1) != len(v2):
@@ -65,11 +64,26 @@ def search_lsh(user_vector: str, k: int) -> int:
     pass
 
 
-# SEARCH TREE METHODS
-@app.route("/tree_build")
-def app_tree_build() -> Tree:
-    return tree_build(DB)
 
+# Search tree
+search_tree = Tree()
+# SEARCH TREE METHODS
+
+# Utilities
+@app.route("/show_tree")
+def app_show_tree() :
+    return str(search_tree)
+
+@app.route("/search_tree/<user_vector>")
+def app_search_tree(user_vector: str) -> str :
+    def aux_search(vector:str, tree:Tree) -> Tree : 
+        
+    return search_tree(user_vector)
+
+# Building the tree
+@app.route("/tree_build")
+def app_tree_build():
+    search_tree = tree_build(DB)
 
 def tree_build(db: list[str]) -> Tree:
     # TODO: make feature order relevant
@@ -108,7 +122,7 @@ def tree_build(db: list[str]) -> Tree:
     return aux_build(feature_order.pop(), [k for k in range(NB_EXAMPLES)])
 
 
-# Utilities
+# Other Utilities
 @app.route("/show/<int:k>")
 def show(k):
     return str(k)
@@ -131,4 +145,4 @@ if __name__ == "__main__":
     # TODO: test unit examples in tree
     # for leaf in tree.leaves() :
     #    print(leaf)
-    # app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=8080)
