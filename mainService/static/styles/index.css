@@ -79,8 +79,8 @@ body {
 } */
 
 .cont {
-    width: 85%;
-    position: absolute;
+    width: 100%;
+    position: inherit;
     display: flex;
     justify-content: space-around;
 }
