@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html style = 'overflow-y:hidden'>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Classimage</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-        <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
-        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    </head>
-    <body>
+<html style='overflow-y:hidden'>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Celebrity Look Alike</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+
+<body>
     <section class="section">
-        <div class="container has-text-centered">
+        <div class="title">
             <h1 class="title is-2 is-spaced has-text-light">
-                Classimage
+                I look like a celebrity
             </h1>
+        </div>
+        <div class="container has-text-centered">
             <form method="post" enctype="multipart/form-data">
                 <div class="field">
                     <div class="file has-name is-centered">
@@ -40,18 +44,69 @@
                 </div>
             </form>
         </div>
-        <div class="card-image is-1by2">
-            <img id="image" src="">
+        <div class="contline">
+            <div class="line">
+            </div>
+        </div>
+
+        <div class="cont">
+
+            <div class="card">
+                <div class="face face1">
+                    <div class="content">
+                        <div class="icon">
+                        </div>
+                    </div>
+                </div>
+                <div class="face face2">
+                    <div class="content">
+                        <h4>
+                            1. Upload a photo
+                        </h4>
+                        <p>There should be only one person in the photo.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="face face1">
+                    <div class="content">
+                        <div class="icon">
+                        </div>
+                    </div>
+                </div>
+                <div class="face face2">
+                    <div class="content">
+                        <h4>
+                            2. The application detecs the face.
+                        </h4>
+                        <p>The system detects the face and creates a facial pattern.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="face face1">
+                    <div class="content">
+                        <div class="icon">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="face face2">
+                    <div class="content">
+                        <h4>
+                            3. Enjoy the result !
+                        </h4>
+                        <p>The Neural Network compares the person with celebrity faces and suggests the most similar
+                            one.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <footer class="footer">
         <div class="content has-text-centered has-text-light">
-            <p>
-            <a href="https://github.com/Wissem0/Projet-Integrateur-Classification-d-images" target="_blank" rel="noopener noreferrer"><strong class="content has-text-light">Classimage</strong></a>. The source code is licensed
-            <a href="http://opensource.org/licenses/mit-license.php" target="_blank" rel="noopener noreferrer" class="content has-text-light is-italic is-underlined">MIT</a>. The website content
-            is licensed <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener noreferrer" class="content has-text-light is-italic is-underlined">CC BY-NC-ND 4.0</a>.
-            </p>
-        </div>
+
+
     </footer>
     <script>
         // Get the input element
@@ -87,16 +142,17 @@
 
             // Split the path by the '\\' character to get the file name
             var fileName = fileName.replace(/^.*[\\\/]/, '');
- 
+
             /* Get image and change value
             of src attribute */
             let image = document.getElementById("image");
 
             image.src =
-            "{{ url_for('send_file', filename='background.jpg') }}";
+                "{{ url_for('send_file', filename='background.jpg') }}";
 
             document.getElementById("btnID").style.display = "none";
         }
     </script>
-    </body>
+</body>
+
 </html>
