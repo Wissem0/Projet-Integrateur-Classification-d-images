@@ -4,6 +4,7 @@ from markupsafe import escape
 from werkzeug.utils import secure_filename
 import flask_monitoringdashboard as dashboard
 import requests
+import base64
 
 # allow files of every image type
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'bmp', 'tiff', 'tif'}
@@ -15,6 +16,8 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024    # 50 Mb limit
 dashboard.bind(app)
+
+encoded_string = ""
 
 @app.route("/hello")
 def hello_world():
@@ -56,5 +59,13 @@ def make_request(url, port, k):
     response = requests.get(f'http://{url}:{port}/show/{k}')
     return response.text
 
+@app.route("/send",methods = ['GET'])
+def send():
+    response = requests.post(f'http://localhost:8083/receive', encoded_string)
+    return "Success!: " + response.text
+
 if __name__ == '__main__':
+    with open("image.jpg", "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read())
+
     app.run(debug=True, host='0.0.0.0', port=3141)
