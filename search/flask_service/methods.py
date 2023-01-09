@@ -7,10 +7,10 @@ from treelib import Node, Tree
 def knn(k:int, dataset:Dataset, user_vector:Example) -> list[Example]:
     """
 
-    param k: Number of neighbors
+    :param k: Number of neighbors
     :param dataset: Dataset
     :param user_vector: Example
-    :return:
+    :return: list of neighbors
     """
     k_nearest = []
     distances = {}
@@ -24,6 +24,7 @@ def knn(k:int, dataset:Dataset, user_vector:Example) -> list[Example]:
             heapq.heappushpop(k_nearest, (d, vector_id))
     
     return [(nearest[0],dataset.examples[nearest[1]].name) for nearest in k_nearest]
+
 class SearchTree:
     search_tree = Tree()
     def __init__(self, dataset: Dataset):
