@@ -22,7 +22,7 @@ def knn(k:int, dataset:Dataset, user_vector:Example) -> list[Example]:
             heapq.heappush(k_nearest, (d, vector_id))
         else:
             heapq.heappushpop(k_nearest, (d, vector_id))
-    return str(k_nearest)
+    return [(dataset.examples[nearest[0]],dataset.examples[nearest[1]]) for nearest in k_nearest]
 
 class SearchTree:
     search_tree = Tree()
