@@ -15,7 +15,7 @@ def search(user_vector:str):
     return str(s)
 
 if __name__ == "__main__":
-    csvFile = pandas.read_csv('../../list_attr_celeba.csv')
+    csvFile = pandas.read_csv('../list_attr_celeba.csv')
     features = csvFile.axes[1][1:]
     names = [str(n) for n in csvFile.get('image_id')]
     # print(features)
