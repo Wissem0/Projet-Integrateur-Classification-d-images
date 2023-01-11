@@ -39,6 +39,7 @@ class SearchTree:
             root = Node(identifier="root")
             aux_tree.add_node(root)
 
+            # Leaf
             if not feature_order:
                 node = Node(str(feature_id), data=examples_ids)
                 aux_tree.add_node(node, "root")
@@ -63,15 +64,27 @@ class SearchTree:
 
             return aux_tree
 
-        # print(str(DB))
-        self.search_tree = aux_build(feature_order.pop(), [k for k in range(len(dataset.examples))])
+        self.search_tree = aux_build()
 
-    # def search(self, user_vector:Example) -> list[Example] :
+    def search(self, user_vector:Example) -> list[Example] :
 
-"""         def search_aux(node:Node) -> Node
+        mismatch_features = []
+        def search_aux(nid:int,current_feature:int=0) -> int :
 
+            node = self.search_tree.get_node(nid)
             search_aux(node)
             self.search_tree.children(node)
-            if(node.)   """
+            if(node.is_leaf(self.search_tree)) : 
+                return node
+            for childid in node.successors(self.search_tree) :
+                if self.search_tree.get_node(childid).tag == user_vector[current_feature] :
+                    return search_aux(childid,current_feature+1)
+            mismatch_features.append(current_feature)
+            return search_aux(childid,current_feature+1)
+        nid = search_aux(self.search_tree.ROOT)
+        siblings = self.search_tree.siblings(nid)
+        siblings.append(nid)
+        return siblings
+        # TODO: get example for each sibling
 
 
