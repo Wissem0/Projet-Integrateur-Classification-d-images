@@ -27,6 +27,10 @@ def knn(k:int, dataset:Dataset, user_vector:Example) -> list[Example]:
 
 class SearchTree:
     search_tree = Tree()
+
+    def __str__(self) -> str:
+        return str(self.search_tree)
+
     def __init__(self, dataset: Dataset):
         feature_order = [k for k in range(len(dataset.features))]
 
@@ -61,3 +65,13 @@ class SearchTree:
 
         # print(str(DB))
         self.search_tree = aux_build(feature_order.pop(), [k for k in range(len(dataset.examples))])
+
+    # def search(self, user_vector:Example) -> list[Example] :
+
+"""         def search_aux(node:Node) -> Node
+
+            search_aux(node)
+            self.search_tree.children(node)
+            if(node.)   """
+
+
