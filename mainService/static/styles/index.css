@@ -102,17 +102,17 @@ body {
 }
 
 .cont .card:nth-child(1) .icon {
-    background-image: url("images/Photo.PNG");
+    background-image: url("images/Photo.png");
     background-size: cover;
 }
 
 .cont .card:nth-child(2) .icon {
-    background-image: url("images/Photo2.PNG");
+    background-image: url("images/Photo2.png");
     background-size: cover;
 }
 
 .cont .card:nth-child(3) .icon {
-    background-image: url("images/photo3.PNG");
+    background-image: url("images/photo3.png");
     background-size: cover;
 }
 
