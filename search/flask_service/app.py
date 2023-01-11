@@ -14,9 +14,9 @@ def search(user_vector:str):
     print(str(v))
     return str(s)
 
-@app.route("")
+@app.route("/")
 def help():
-    return "<b>Welcome to my brand new webpage.</b>\n Services available:\n- /search/< binary vector (size = "+str(len(dataset.features))+")>"
+    return "<b>Welcome to my brand new webpage.</b><div>Services available:</div><div>- /search/< binary vector (size = "+str(len(dataset.features))+")><div/>"
 
 if __name__ == "__main__":
     
