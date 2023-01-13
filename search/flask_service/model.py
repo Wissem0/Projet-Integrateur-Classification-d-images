@@ -11,15 +11,24 @@ class Attribute:
 
 class Example:
     name = None
-    attributes = None
+    attributes = []
     def __init__(self, name: str, attributes: list[Attribute]):
+
+        if type(name) != str: 
+            raise TypeError("name should be of type str")
+        if type(attributes) != list: 
+            raise TypeError("attributes should be of type list")
+            
         if name:
             self.name = name
         else:
             raise ValueError('Example name should not be empty.')
 
         if attributes:
-            self.attributes = [str(at) for at in attributes]
+            for at in attributes :
+                if type(at) != Attribute: 
+                    raise TypeError("attributes should only contain elements of type Attribute")
+                self.attributes.append(str(at))
         else:
             ValueError('An example should have at least one attribute.')
 
@@ -44,7 +53,7 @@ class Dataset:
     examples = []
     features = []
     def __init__(self, features: list[str], examples: list[Example]):
-        self.features = features
+        self.features = list.copy(features)
         for example in examples:
             self.append(example)
     def __len__(self):
@@ -53,7 +62,7 @@ class Dataset:
         return "Dataset of "+str(len(self.features))+" features and " +str(len(self.examples))+" examples"
 
     def append(self, example: Example):
-        if len(example) == len(self.features):
+        if len(example.attributes) == len(self.features):
             self.examples.append(example)
         else :
-            raise ValueError('Example <'+example.name+'> has ' + str(len(example)) + ' feature(s): ' + str(len(self.features)) + ' required.')
+            raise ValueError('Example <'+example.name+'> has ' + str(len(example.attributes)) + ' attribute(s): ' + str(len(self.features)) + ' required.')
