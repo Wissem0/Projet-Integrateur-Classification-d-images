@@ -7,6 +7,9 @@ class Attribute:
             self.attribute = attribute
         else:
             raise ValueError('Not a valid symbol: \'' + attribute + '\' not in ' + str(self.SYMBOLS))
+    
+    def __str__(self) :
+        return str(self.attribute)
 
 
 class Example:
@@ -37,9 +40,10 @@ class Example:
     def __len__(self):
         return len(self.attributes)
 
-    def __int__(self,base:int=10):
-        return int(''.join(self.attributes),base=base)
-
+    # Looking forward to implement __int__ with 'base' argument. Issue: can't specify 'base' for non str object 
+    def get_bin_value(self) -> int :
+        return int(''.join([str(a) for a in self.attributes]),base=2)
+        
     def __str__(self):
         return str((self.name,self.attributes))
 
@@ -48,7 +52,7 @@ class Example:
         if len(self) != len(e2):
             raise ValueError(
                 "Binary vectors should have same length (len<"+self.name+">=" + str(len(self)) + ",len<"+e2.name+">=" + str(len(e2))+")")
-        return sum( [ int(bit) for bit in bin( Example.__int__(self, base=2) ^ Example.__int__(e2, base=2) )[2:]] )
+        return sum( [ int(bit) for bit in bin( Example.get_bin_value(self) ^ Example.get_bin_value(e2) )[2:]] )
 
 
 class Dataset:

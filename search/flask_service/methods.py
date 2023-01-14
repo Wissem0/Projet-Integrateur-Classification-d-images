@@ -64,7 +64,7 @@ class SearchTree:
 
             return aux_tree
 
-        self.search_tree = aux_build()
+        self.search_tree = aux_build(feature_order.pop(), [k for k in range(len(dataset.examples))])
 
     def search(self, user_vector:Example) -> list[Example] :
 
