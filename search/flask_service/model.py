@@ -10,9 +10,11 @@ class Attribute:
 
 
 class Example:
-    name = None
-    attributes = []
+    
     def __init__(self, name: str, attributes: list[Attribute]):
+        
+        self.name = None
+        self.attributes = []
 
         if type(name) != str: 
             raise TypeError("name should be of type str")
@@ -28,7 +30,7 @@ class Example:
             for at in attributes :
                 if type(at) != Attribute: 
                     raise TypeError("attributes should only contain elements of type Attribute")
-                self.attributes.append(str(at))
+                self.attributes.append(at)
         else:
             ValueError('An example should have at least one attribute.')
 
@@ -54,6 +56,7 @@ class Dataset:
     features = []
     def __init__(self, features: list[str], examples: list[Example]):
         self.features = list.copy(features)
+        print("self.features " + str(self.features))
         for example in examples:
             self.append(example)
     def __len__(self):
