@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  search:
+    build: ./search
+    container_name: search
+    ports:
+      - '5000:5000'
+    # environment:
+    #   - Flask_APP=main.py
+  frontend:
+    build: ./mainService
+    container_name: frontend
+    ports:
+      - '3141:3141'
+    depends_on:
+      - search
+  # cnn:

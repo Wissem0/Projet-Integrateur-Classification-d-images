@@ -19,17 +19,21 @@ dashboard.bind(app)
 
 encoded_string = ""
 
+
 @app.route("/hello")
 def hello_world():
     return "<p>Hello, World!</p>"
+
 
 @app.route("/hello/<name>")
 def hello(name):
     return f"Hello, {escape(name)}!"
 
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
@@ -50,19 +54,23 @@ def upload_file():
             return redirect(url_for('upload_file', name=filename))
     return render_template('index.html')
 
+
 @app.route('/faces/<filename>')
 def send_file(filename):
     return send_from_directory(UPLOAD_FOLDER, filename)
+
 
 @app.route('/<url>:<port>/show/<int:k>')
 def make_request(url, port, k):
     response = requests.get(f'http://{url}:{port}/show/{k}')
     return response.text
 
-@app.route("/send",methods = ['GET'])
+
+@app.route("/send", methods=['GET'])
 def send():
     response = requests.post(f'http://localhost:8083/receive', encoded_string)
     return "Success!: " + response.text
+
 
 if __name__ == '__main__':
     with open("image.jpg", "rb") as image_file:
