@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
-import pandas
-import random
-import os
 from model import Attribute, Example, Dataset
 from methods import knn, SearchTree
 from treelib import Tree, Node
+
+"""
+import pandas
+import random
+import os
+
 PATH_TO_CSV = ['list_attr_celeba.csv','../list_attr_celeba.csv','../../list_attr_celeba.csv',]
 
 def generate_example(nb_features: int) -> Example:
     return Example("Random Example",[Attribute(str(random.randint(0, 1))) for j in range(nb_features)])
-"""
+
 def test_tree () :
     csvFile = pandas.read_csv('../../list_attr_celeba.csv')
     features = csvFile.axes[1][1:]
@@ -27,6 +30,7 @@ def test_tree () :
     #user_example = generate_example(len(dataset.features))
     #print(str(user_example))
  """
+"""
 def init_test() :
     path = None
     for trypath in PATH_TO_CSV : 
@@ -73,7 +77,24 @@ def test_tree() :
     tree = SearchTree(dataset)
     print("Search tree:")
     print(tree)
+"""
+class TestSearchTree:
+    def generic_build(d:Dataset,expected:Tree) :
+        assert SearchTree(d) == expected        
 
-
+    def test_5x5():
+        raw = [[0,0,1,1,0],
+               [0,1,0,1,0],
+               [0,0,0,1,0],
+               [0,1,0,1,0],
+               [1,1,0,1,0]]
+        baked = []       
+        for i in range(len(raw)) :
+            baked.append([])
+            for j in range(len(raw[0])) :
+                baked[i].append(Attribute(str(raw[i][j])))
+            baked[-1] = Example(str(i),baked[-1])
+        d = ("5x5", baked)
+        print(str(d))
 if __name__ == "__main__":
-    test_tree ()
+    TestSearchTree.test_5x5()
