@@ -15,3 +15,8 @@ services:
     depends_on:
       - search
   # cnn:
+  orchestrateur:
+    build: ./orchestrateur
+    container_name: orchestrateur
+    ports:
+      - '8080:8080'
