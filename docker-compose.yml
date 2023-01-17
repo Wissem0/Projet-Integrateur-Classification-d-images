@@ -14,9 +14,15 @@ services:
       - '3141:3141'
     depends_on:
       - search
-  # cnn:
-  orchestrateur:
-    build: ./orchestrateur
-    container_name: orchestrateur
+      - cnn
+  cnn:
+    build: ./flask_CNN
+    container_name: cnn
     ports:
-      - '8080:8080'
+      - '8083:8083'
+
+  # orchestrateur:
+  #   build: ./orchestrateur
+  #   container_name: orchestrateur
+  #   ports:
+  #     - '8080:8080'
