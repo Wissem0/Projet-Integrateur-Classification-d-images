@@ -51,6 +51,11 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            with open("./faces/"+filename, "rb") as image_file:
+                encoded_string = base64.b64encode(image_file.read())
+            response = requests.post(f'http://localhost:8083/receive', encoded_string)
+            print("Success!: " + response.text)
+            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('upload_file', name=filename))
     return render_template('index.html')
 
@@ -73,7 +78,4 @@ def send():
 
 
 if __name__ == '__main__':
-    with open("image.jpg", "rb") as image_file:
-        encoded_string = base64.b64encode(image_file.read())
-
     app.run(debug=True, host='0.0.0.0', port=3141)
