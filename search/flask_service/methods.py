@@ -2,6 +2,7 @@ import heapq
 
 from model import Attribute, Example, Dataset
 from treelib import Node, Tree
+from py_lsh import LSHash
 
 
 def knn(k:int, dataset:Dataset, user_vector:Example) -> list[Example]:
@@ -87,4 +88,9 @@ class SearchTree:
         return siblings
         # TODO: get example for each sibling
 
+"""
 
+class LSH :
+    lsh = None
+    __init__()
+"""
