@@ -28,3 +28,5 @@ spec:
       containers:
         - name: frontend
           image: coolwhiteguy/frontend
+        - name: knn
+          image: coolwhiteguy/knn
