@@ -1,10 +1,10 @@
 version: '3.8'
 services:
-  search:
-    build: ./search
-    container_name: search
-    ports:
-      - '5000:5000'
+  # search:
+  #   build: ./search
+  #   container_name: search
+  #   ports:
+  #     - '5000:5000'
     # environment:
     #   - Flask_APP=main.py
   frontend:
@@ -13,10 +13,10 @@ services:
     ports:
       - '3141:3141'
     depends_on:
-      - search
+      # - search
       - cnn
   cnn:
-    build: ./flask_CNN
+    build: ./flask_CNN_2
     container_name: cnn
     ports:
       - '8083:8083'

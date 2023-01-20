@@ -1,0 +1,9 @@
+flask
+tensorflow
+matplotlib
+pandas
+numpy
+# glob
+# os
+Image
+# base64
