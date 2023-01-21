@@ -81,8 +81,7 @@ body {
 .cont {
     width: 100%;
     position: inherit;
-    display: flex;
-    justify-content: space-around;
+    display: inline;
 }
 
 .cont .card {
@@ -116,6 +115,22 @@ body {
     background-size: cover;
 }
 
+.result {
+    width: 100%;
+    position: inherit;
+    display: flex;
+    justify-content: space-around;
+}
+
+img {
+    height: 320px;
+    width: 73%;
+}
+
+.fit-picture {
+    background-image: url("images/image.png");
+    background-size: cover;
+}
 
 .cont .card .icon .fa {
     position: absolute;
@@ -169,6 +184,10 @@ i {
 
 .cont .card .face.face1 .content i {
     max-width: 100px;
+}
+
+h4 {
+    color: antiquewhite;
 }
 
 .cont .card .face.face2 {
