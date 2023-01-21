@@ -58,7 +58,7 @@ def upload_file():
             print("Success!: ")
             print('Hello world!', file=sys.stderr)
             response = requests.post(
-                f'http://cnn:8083/receive', encoded_string)
+                f'http://orchestrateur:8080/transfert_cnn', encoded_string)
             print(response.text, file=sys.stderr)
             os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('upload_file', name=filename))
