@@ -13,10 +13,11 @@ PATH_TO_CSV = ['list_attr_celeba.csv',
 
 @app.route("/search/<user_vector>", methods=['POST', 'GET'])
 def search(user_vector: str):
-    v = [Attribute(k) for k in user_vector]
-    s = knn(5, dataset, Example("user", v))
-    print(str(v))
-    return str(s)
+    # v = [Attribute(k) for k in user_vector]
+    # s = knn(5, dataset, Example("user", v))
+    # print(str(v))
+
+    return user_vector + 'received'
 
 
 @app.route("/")

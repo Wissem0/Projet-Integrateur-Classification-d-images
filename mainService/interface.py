@@ -5,7 +5,8 @@ from werkzeug.utils import secure_filename
 import flask_monitoringdashboard as dashboard
 import requests
 import base64
-
+import time
+import sys
 # allow files of every image type
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'bmp', 'tiff', 'tif'}
 
@@ -53,9 +54,12 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             with open("./faces/"+filename, "rb") as image_file:
                 encoded_string = base64.b64encode(image_file.read())
+            # time.sleep(60)
+            print("Success!: ")
+            print('Hello world!', file=sys.stderr)
             response = requests.post(
-                f'http://localhost:8083/receive', encoded_string)
-            print("Success!: " + response.text)
+                f'http://cnn:8083/receive', encoded_string)
+            print(response.text, file=sys.stderr)
             os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('upload_file', name=filename))
     return render_template('index.html')

@@ -8,7 +8,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import glob
+import requests
 import os
+import sys
 from PIL import Image
 import base64
 
@@ -51,9 +53,9 @@ app = Flask(__name__)
 
 @app.route("/receive", methods=['POST', 'GET'])
 def vector_prediction():
-    #Paths & model
-    FACE_WEIGHT_VGG16 = './vgg16.h5'
-    MODEL_20_EPOCHS = './model_20_epochs.h5'
+    # Paths & model
+    FACE_WEIGHT_VGG16 = 'vgg16.h5'
+    MODEL_20_EPOCHS = 'model_20_epochs.h5'
 
     # Variables
     features = ['5_o_Clock_Shadow', 'Arched_Eyebrows', 'Attractive', 'Bags_Under_Eyes', 'Bald', 'Bangs',
@@ -81,8 +83,8 @@ def vector_prediction():
     img_file.close()
 
     # Loading image
+
     image = tf.io.read_file('decoded_image.jpg')
-    # image = tf.io.read_file('./rostom.jpg')
     image = tf.io.decode_jpeg(contents=image, channels=3)
     image = tf.cast(image, tf.float32)
     image = tf.divide(image, 255.)
@@ -101,9 +103,12 @@ def vector_prediction():
         prediction_vector.append((label, pred))
     for i in prediction_vector:
         print(i)
+    print('Hello world-2', file=sys.stderr)
+    response = requests.get(
+        f'http://search:5000/search/'+str(prediction_vector))
+    print(response.text, file=sys.stderr)
+    return str(prediction_vector)
 
-
-vector_prediction()
 
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=False, host='0.0.0.0', port=8083)
