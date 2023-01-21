@@ -6,4 +6,5 @@ numpy
 # glob
 # os
 Image
+requests
 # base64

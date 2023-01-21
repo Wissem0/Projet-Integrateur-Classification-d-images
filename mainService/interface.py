@@ -54,7 +54,7 @@ def upload_file():
             with open("./faces/"+filename, "rb") as image_file:
                 encoded_string = base64.b64encode(image_file.read())
             response = requests.post(
-                f'http://cnn:8083/receive', encoded_string)
+                f'http://localhost:8083/receive', encoded_string)
             print("Success!: " + response.text)
             os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('upload_file', name=filename))

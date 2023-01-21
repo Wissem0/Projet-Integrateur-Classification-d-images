@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import glob
+import requests
 import os
 from PIL import Image
 import base64
@@ -78,12 +79,12 @@ def vector_prediction():
     decoded_data = base64.b64decode((encodedImage))
 
     # Saving decoded data as image
-    img_file = open('./decoded_image.jpg', 'wb')
+    img_file = open('decoded_image2.jpg', 'wb')
     img_file.write(decoded_data)
     img_file.close()
 
     # Loading image
-    image = tf.io.read_file('./decoded_image.jpg')
+    image = tf.io.read_file('decoded_image2.jpg')
 #     image = tf.io.read_file('./image_samples/000013.jpg')
     image = tf.io.decode_jpeg(contents=image, channels=3)
     image = tf.cast(image, tf.float32)
@@ -101,6 +102,9 @@ def vector_prediction():
     for i, label in enumerate(features):
         pred = 1 if result[0][i] > threshold else 0
         prediction_vector.append((label, pred))
+    response = requests.get(
+        f'http://localhost:5000/search/'+'1001010010100101001010010100101001010010')
+    print(response.text)
     return vector_prediction
 
 
