@@ -90,6 +90,7 @@ def vector_prediction():
     for i, label in enumerate(features):
         pred = 1 if result[0][i] > threshold else 0
         prediction_vector.append((label, pred))
+    print(vector_prediction)
     return vector_prediction 
         
 vector_prediction()
