@@ -2,6 +2,7 @@
 Relies on unsupervised machine learning trained using https://www.kaggle.com/datasets/jessicali9530/celeba-dataset (40 features)
 
 ![Project Architechture Diagram](architechture.drawio.svg)
+![Project Architechture Diagram](orchestration.png)
 
 ## Sequence of actions : 
 Before release : 
