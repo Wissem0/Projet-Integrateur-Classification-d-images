@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html style='overflow-y:hidden'>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Celebrity Look Alike</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="title">
+            <h1 class="title is-2 is-spaced has-text-light">
+                I look like a celebrity
+            </h1>
+        </div>
+        <div class="container has-text-centered">
+            <form method="post" enctype="multipart/form-data">
+                <div class="field">
+                    <div class="file has-name is-centered">
+                        <label class="file-label">
+                            <input class="file-input" type="file" name="file" onchange="displayFileName(this)">
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+                                <span class="file-label">
+                                    Choose a file
+                                </span>
+                            </span>
+                            <span class="file-name has-text-left has-text-light">
+                                No file chosen
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="field is-centered">
+                    <div class="control">
+                        <input type="submit" value="Upload" class="button is-primary" onclick="show(this)" id="btnID">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="contline">
+            <div class="line">
+            </div>
+        </div>
+
+        <div class="cont">
+            <div class="result">
+                <img class="fit-picture">
+            </div>
+            <br>
+            <div>
+                <h4>you look like this celebrity at 86% .</h4>
+            </div>
+
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="content has-text-centered has-text-light">
+            <p>
+                <a href="https://github.com/Wissem0/Projet-Integrateur-Classification-d-images" target="_blank"
+                    rel="noopener noreferrer"><strong class="content has-text-light">Classimage</strong></a>. The source
+                code is licensed
+                <!-- <a href="http://opensource.org/licenses/mit-license.php" target="_blank" rel="noopener noreferrer" class="content has-text-light is-italic is-underlined">MIT</a>. The website content
+                is licensed <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener noreferrer" class="content has-text-light is-italic is-underlined">CC BY-NC-ND 4.0</a>. -->
+            </p>
+        </div>
+
+    </footer>
+    <script>
+        // Get the input element
+        var input = document.querySelector('input[type="file"]');
+
+        // Listen for changes to the input element
+        input.addEventListener('change', displayFileName);
+
+        function displayFileName() {
+            // Get the file name from the input element
+            var fileName = input.value;
+
+            // Split the path by the '\\' character to get the file name
+            var fileName = fileName.replace(/^.*[\\\/]/, '');
+
+            // Get the file name display element
+            var fileNameDisplay = document.querySelector('.file-name');
+
+            // Set the file name display text to the selected file name
+            fileNameDisplay.innerHTML = fileName;
+        }
+
+        // Get the input element
+        var show_face = document.querySelector('input[type="submit"]');
+
+        // Listen for changes to the input element
+        show_face.addEventListener('change', show);
+
+        function show() {
+
+            // Get the file name from the input element
+            var fileName = input.value;
+
+            // Split the path by the '\\' character to get the file name
+            var fileName = fileName.replace(/^.*[\\\/]/, '');
+
+            /* Get image and change value
+            of src attribute */
+            let image = document.getElementById("image");
+
+            image.src =
+                "{{ url_for('send_file', filename='background.jpg') }}";
+
+            document.getElementById("btnID").style.display = "none";
+        }
+    </script>
+</body>
+
+</html>
