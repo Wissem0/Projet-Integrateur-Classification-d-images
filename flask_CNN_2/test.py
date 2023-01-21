@@ -98,16 +98,18 @@ def vector_prediction():
     # Creating output vector
     threshold = 0.4
     prediction_vector = []
+    binary_vector = ""
     for i, label in enumerate(features):
         pred = 1 if result[0][i] > threshold else 0
         prediction_vector.append((label, pred))
+        binary_vector += str(pred)
     for i in prediction_vector:
         print(i)
     print('Hello world-2', file=sys.stderr)
     response = requests.get(
         f'http://search:5000/search/'+str(prediction_vector))
     print(response.text, file=sys.stderr)
-    return str(prediction_vector)
+    return binary_vector
 
 
 if __name__ == "__main__":
