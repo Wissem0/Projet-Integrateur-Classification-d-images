@@ -39,7 +39,7 @@
                 </div>
                 <div class="field is-centered">
                     <div class="control">
-                        <input type="submit" value="Upload" class="button is-primary" onclick="show(this)" id="btnID">
+                        <input type="submit" value="Upload" class="button is-primary" id="btnID">
                     </div>
                 </div>
             </form>
@@ -132,30 +132,6 @@
 
             // Set the file name display text to the selected file name
             fileNameDisplay.innerHTML = fileName;
-        }
-
-        // Get the input element
-        var show_face = document.querySelector('input[type="submit"]');
-
-        // Listen for changes to the input element
-        show_face.addEventListener('change', show);
-
-        function show() {
-
-            // Get the file name from the input element
-            var fileName = input.value;
-
-            // Split the path by the '\\' character to get the file name
-            var fileName = fileName.replace(/^.*[\\\/]/, '');
-
-            /* Get image and change value
-            of src attribute */
-            let image = document.getElementById("image");
-
-            image.src =
-                "{{ url_for('send_file', filename='background.jpg') }}";
-
-            document.getElementById("btnID").style.display = "none";
         }
     </script>
 </body>
