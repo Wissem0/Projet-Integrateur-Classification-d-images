@@ -53,7 +53,7 @@ if __name__ == "__main__":
             raise ValueError('Example <'+example.name+'> has ' + str(len(example.attributes)) +
                              ' attribute(s): ' + str(len(features)) + ' required. (len(attributes) = '+str(len(attributes))+')')
     print("Loaded "+str(len(example_list))+" examples. \nBuilding dataset ...")
-    dataset = Dataset(features, example_list)
+    dataset = Da5000taset(features, example_list)
     print("Dataset build.")
     print(str(dataset))
     app.run(debug=True, host='0.0.0.0', port=5000)

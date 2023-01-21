@@ -52,8 +52,8 @@ app = Flask(__name__)
 @app.route("/receive", methods=['POST', 'GET'])
 def vector_prediction():
     #Paths & model
-    FACE_WEIGHT_VGG16 = './vgg16.h5'
-    MODEL_20_EPOCHS = './model_20_epochs.h5'
+    FACE_WEIGHT_VGG16 = 'vgg16.h5'
+    MODEL_20_EPOCHS = 'model_20_epochs.h5'
 
     # Variables
     features = ['5_o_Clock_Shadow', 'Arched_Eyebrows', 'Attractive', 'Bags_Under_Eyes', 'Bald', 'Bangs',
@@ -81,8 +81,8 @@ def vector_prediction():
     img_file.close()
 
     # Loading image
-    image = tf.io.read_file('decoded_image.jpg')
-    # image = tf.io.read_file('./rostom.jpg')
+
+    image = tf.io.read_file('./decoded_image.jpg')
     image = tf.io.decode_jpeg(contents=image, channels=3)
     image = tf.cast(image, tf.float32)
     image = tf.divide(image, 255.)
@@ -101,9 +101,7 @@ def vector_prediction():
         prediction_vector.append((label, pred))
     for i in prediction_vector:
         print(i)
-
-
-vector_prediction()
+    return str(prediction_vector)
 
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=False, host='0.0.0.0', port=8083)
