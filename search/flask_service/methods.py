@@ -1,9 +1,14 @@
 import heapq
 
-from model import Attribute, Example, Dataset
-from treelib import Node, Tree
-from py_lsh import LSHash
 
+from model import Attribute, Example, Dataset
+
+# TREE BASED METHOD
+from treelib import Node, Tree
+
+# LSH KNN
+"""from lshknn import Lshknn
+import numpy as np"""
 
 def knn(k:int, dataset:Dataset, user_vector:Example) -> list[Example]:
     """
@@ -18,7 +23,7 @@ def knn(k:int, dataset:Dataset, user_vector:Example) -> list[Example]:
     for vector_id in range(len(dataset)):
         # print("k_nearest: "+str([(nearest[0],dataset.examples[nearest[1]].name) for nearest in k_nearest]))
         vector = dataset.examples[vector_id]
-        d = len(dataset.features) - Example.hamming_distance(vector, user_vector)
+        d = dataset.sum_weights - Example.hamming_distance(vector, user_vector)
         distances[vector_id] = d
         if len(k_nearest) < k:
             # print((d, vector_id))
@@ -29,8 +34,8 @@ def knn(k:int, dataset:Dataset, user_vector:Example) -> list[Example]:
         # if k_nearest[0] != (40,0) :
             # print("DIFF "+str( k_nearest[0] ))
     # print("k_nearest final: " + str([(nearest[0], dataset.examples[nearest[1]].name) for nearest in k_nearest]))
-    return [(nearest[0]*100/len(dataset.features) ,dataset.examples[nearest[1]].name) for nearest in k_nearest]
-
+    return [(nearest[0],dataset.examples[nearest[1]].name) for nearest in k_nearest]
+"""
 class SearchTree:
     search_tree = Tree()
 
@@ -95,7 +100,8 @@ class SearchTree:
 
 """
 
-class LSH :
-    lsh = None
-    __init__()
+"""class LSH :
+    def __init__(self,dataset:Dataset) :
+        baked = [[int(a.attribute) for a in e.attributes] for e in dataset.examples]
+        self.lshknn = Lshknn(data=baked,k=1,threshold=0.2,m=10,slice_length=4)
 """
