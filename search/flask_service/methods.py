@@ -16,15 +16,20 @@ def knn(k:int, dataset:Dataset, user_vector:Example) -> list[Example]:
     k_nearest = []
     distances = {}
     for vector_id in range(len(dataset)):
+        # print("k_nearest: "+str([(nearest[0],dataset.examples[nearest[1]].name) for nearest in k_nearest]))
         vector = dataset.examples[vector_id]
-        d = Example.hamming_distance(vector, user_vector)
+        d = len(dataset.features) - Example.hamming_distance(vector, user_vector)
         distances[vector_id] = d
         if len(k_nearest) < k:
+            # print((d, vector_id))
             heapq.heappush(k_nearest, (d, vector_id))
         else:
             heapq.heappushpop(k_nearest, (d, vector_id))
-    
-    return [(nearest[0],dataset.examples[nearest[1]].name) for nearest in k_nearest]
+
+        # if k_nearest[0] != (40,0) :
+            # print("DIFF "+str( k_nearest[0] ))
+    # print("k_nearest final: " + str([(nearest[0], dataset.examples[nearest[1]].name) for nearest in k_nearest]))
+    return [(nearest[0]*100/len(dataset.features) ,dataset.examples[nearest[1]].name) for nearest in k_nearest]
 
 class SearchTree:
     search_tree = Tree()

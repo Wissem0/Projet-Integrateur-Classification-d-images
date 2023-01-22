@@ -2,8 +2,10 @@
 from model import Attribute, Example, Dataset
 from methods import knn, SearchTree
 from treelib import Tree, Node
+import pytest
 
-"""
+# test method knn : image 1 : 0110000000010000001101001001000110101001 
+
 import pandas
 import random
 import os
@@ -12,7 +14,7 @@ PATH_TO_CSV = ['list_attr_celeba.csv','../list_attr_celeba.csv','../../list_attr
 
 def generate_example(nb_features: int) -> Example:
     return Example("Random Example",[Attribute(str(random.randint(0, 1))) for j in range(nb_features)])
-
+"""
 def test_tree () :
     csvFile = pandas.read_csv('../../list_attr_celeba.csv')
     features = csvFile.axes[1][1:]
@@ -29,7 +31,6 @@ def test_tree () :
     print(tree)
     #user_example = generate_example(len(dataset.features))
     #print(str(user_example))
- """
 """
 def init_test() :
     path = None
@@ -65,19 +66,19 @@ def init_test() :
     print(str(user_example))
     return(dataset,user_example)
 
-def test_knn(k) :
+def essai_knn(k) :
     dataset,user_example = init_test()
     print("Running KNN with K="+str(k)+" ...")
     knn_result = knn(k,dataset,user_example)
     print(knn_result)
-
-def test_tree() :
+"""
+def essai_tree() :
     dataset,user_example = init_test()
     print("Generating search tree ...")
     tree = SearchTree(dataset)
     print("Search tree:")
     print(tree)
-"""
+
 class TestSearchTree:
     def generic_build(d:Dataset,expected:Tree) :
         assert SearchTree(d) == expected        
@@ -96,5 +97,22 @@ class TestSearchTree:
             baked[-1] = Example(str(i),baked[-1])
         d = ("5x5", baked)
         print(str(d))
-if __name__ == "__main__":
-    TestSearchTree.test_5x5()
+"""
+class TestKNN : 
+    def setup(self) :
+        self.dataset,_ = init_test()
+
+    def distance_from_self(self, e_id:int):
+        # Image 00001.jpg
+        # user_example = Example("user",[Attribute(k) for k in "0110000000010000001101001001000110101001"])
+        user_example = self.dataset.examples[e_id]
+        # print("Running KNN with K="+str(1)+" ...")
+        knn_result = knn(1,self.dataset,user_example)
+        # print(knn_result)
+        # print(knn_result[0])
+        assert knn_result[0][0] == 100
+
+    def test_distance_from_self(self) :
+        self.setup()
+        for _ in range(10):
+            self.distance_from_self(random.randint( 0, len(self.dataset.examples)))

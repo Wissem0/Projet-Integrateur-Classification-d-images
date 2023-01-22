@@ -58,10 +58,11 @@ class Example:
 class Dataset:
     examples = []
     features = []
-    def __init__(self, features: list[str], examples: list[Example]):
+    def __init__(self, features: list[str], examples_init: list[Example]):
         self.features = list.copy(features)
         print("self.features " + str(self.features))
-        for example in examples:
+        self.examples = []
+        for example in examples_init:
             self.append(example)
     def __len__(self):
         return len(self.examples)

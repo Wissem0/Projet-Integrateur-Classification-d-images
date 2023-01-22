@@ -9,8 +9,8 @@ app = Flask(__name__)
 dataset = None
 PATH_TO_CSV = ['list_attr_celeba.csv',
                '../list_attr_celeba.csv', '../../list_attr_celeba.csv',]
-SELECTED_FEATURE_IDS = [8, 9, 11, 15, 17, 18, 20, 24, 31, 34, 39]
-
+# SELECTED_FEATURE_IDS = [8, 9, 11, 15, 17, 18, 20, 24, 31, 34, 39]
+SELECTED_FEATURE_IDS = [k for k in range(40)]
 @app.route("/search/<user_vector>", methods=['POST', 'GET'])
 def search(user_vector: str):
     # v = [Attribute(k) for k in user_vector]
@@ -72,4 +72,4 @@ if __name__ == "__main__":
     dataset = Dataset(features, example_list)
     print("Dataset build.")
     print(str(dataset))
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, use_reloader=False, host='0.0.0.0', port=5000)
