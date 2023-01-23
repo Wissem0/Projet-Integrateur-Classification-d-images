@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: fr.insa.projetint.Orchestrateur.OrchestrateurApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.829 s - in fr.insa.projetint.Orchestrateur.OrchestrateurApplicationTests

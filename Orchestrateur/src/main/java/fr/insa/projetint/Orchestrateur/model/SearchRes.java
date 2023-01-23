@@ -12,7 +12,7 @@ public class SearchRes {
 	}
 	
 	public ArrayList<ArrayList<String>> getRes() {
-		return res;
+		return this.res;
 	}
 
 	public void setRes(ArrayList<ArrayList<String>> res) {
