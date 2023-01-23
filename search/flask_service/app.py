@@ -20,8 +20,8 @@ def search(user_vector: str):
     for k in range(len(user_vector)) :
         v.append(Attribute(user_vector[k],WEIGHTS[k]))
     s = knn(5, dataset, Example("user", v))
-    s = [ (n[0]*S_WEIGHTS,n[1]) for n in s ]
-    return str(s)
+    s = [ (str(n[0]*S_WEIGHTS),n[1]) for n in s ]
+    return {"res": s}
 
 @app.route("/")
 def help():
