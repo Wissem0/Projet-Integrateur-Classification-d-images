@@ -106,9 +106,9 @@ def vector_prediction():
     for i in prediction_vector:
         print(i)
     print('Hello world-2', file=sys.stderr)
-    response = requests.get(
-        f'http://search:5000/search/'+str(prediction_vector))
-    print(response.text, file=sys.stderr)
+    # response = requests.get(
+    #     f'http://search:5000/search/'+str(prediction_vector))
+    # print(response.text, file=sys.stderr)
     return binary_vector
 
 
