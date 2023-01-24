@@ -21,8 +21,8 @@ services:
     ports:
       - '8083:8083'
 
-  # orchestrateur:
-  #   build: ./orchestrateur
-  #   container_name: orchestrateur
-  #   ports:
-  #     - '8080:8080'
+  orchestrateur:
+    build: ./Orchestrateur
+    container_name: orchestrateur
+    ports:
+      - '8080:8080'
