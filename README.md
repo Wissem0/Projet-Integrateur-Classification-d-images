@@ -1,7 +1,7 @@
 # A web game that matches the user with the celebrity they most resemble. 
 Relies on unsupervised machine learning trained using https://www.kaggle.com/datasets/jessicali9530/celeba-dataset (40 features)
 
-![Project Architechture Diagram](architechture.drawio.svg)
+![Project Architechture Diagram](architechture_v2.drawio.svg)
 ![Project Architechture Diagram](orchestration.png)
 
 ## Sequence of actions : 
