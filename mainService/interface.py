@@ -3,6 +3,7 @@ from flask import Flask, flash, request, redirect, send_from_directory, url_for,
 from markupsafe import escape
 from werkzeug.utils import secure_filename
 import flask_monitoringdashboard as dashboard
+import numpy as np
 import requests
 import base64
 import time
@@ -57,15 +58,37 @@ def upload_file():
             # time.sleep(60)
             print("Success!: ")
             print('Hello world!', file=sys.stderr)
-            response = requests.post(f'http://orchestrateur:8080/transfert_cnn', encoded_string)
+            response = requests.post(
+                f'http://orchestrateur:8080/transfert_cnn', encoded_string)
             print(response.text, file=sys.stderr)
             os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('result', name=filename))
     return render_template('index.html')
 
+
 @app.route('/result', methods=['GET', 'POST'])
 def result():
-    return render_template('result.html')
+    a = requests.post(
+        f'http://orchestrateur:8080/transfert_cnn', encoded_string)
+    b = []
+    ratioList = []
+    # a = [["99.89", "132108.jpg"], ["99", '143864.jpg'], ['99', '143369.jpg'],
+    #      ["98", '191011.jpg'], ["98", '157682.jpg']]
+    # a = [["123456.jpg", 86],
+    #      ["123457.jpg", 80],
+    #      ["123458.jpg", 50],
+    #      ["123459.jpg", 45],
+    #      ["123460.jpg", 40]]
+    for row in a:
+        b.append(np.asarray(row))
+    imageList = os.listdir('static/data')
+    imageList = ['data/' + image[1] for image in b]
+    # for image in a:
+    #     print(image[1])
+    #     ratioList.append(image[1])
+    # print(ratioList)
+    return render_template('result.html', imageList=imageList, ratioList=b)
+
 
 @app.route('/faces/<filename>')
 def send_file(filename):

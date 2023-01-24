@@ -1,6 +1,6 @@
 html,
 body {
-    height: 100%;
+    height: 100vh;
     width: 100%;
 }
 
@@ -91,6 +91,14 @@ body {
     display: inline;
 }
 
+.resultat {
+    width: 100%;
+    position: inherit;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 19px;
+}
+
 .cont .card {
     position: relative;
     border-radius: 10px;
@@ -126,13 +134,17 @@ body {
     width: 100%;
     position: inherit;
     display: flex;
-    justify-content: space-evenly;
-    margin-top: 40px;
+    justify-content: space-around;
+    margin-top: 28px;
+}
+
+.phrase {
+    margin-top: 70px;
 }
 
 img {
-    height: 321px;
-    width: 36%;
+    height: 100%;
+    width: 97%;
 }
 
 .fit-picture {
