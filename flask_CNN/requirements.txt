@@ -1,7 +1,0 @@
-numpy
-pandas
-matplotlib
-tensorflow_hub
-flask
-joblib
-# math
