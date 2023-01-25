@@ -1,6 +1,7 @@
 import os
 from flask import Flask, flash, request, redirect, send_from_directory, url_for, render_template
 from markupsafe import escape
+from ast import literal_eval
 from werkzeug.utils import secure_filename
 import flask_monitoringdashboard as dashboard
 import numpy as np
@@ -20,6 +21,7 @@ app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024    # 50 Mb limit
 dashboard.bind(app)
 
 encoded_string = ""
+# global var
 
 
 @app.route("/hello")
@@ -60,17 +62,29 @@ def upload_file():
             print('Hello world!', file=sys.stderr)
             response = requests.post(
                 f'http://orchestrateur:8080/transfert_cnn', encoded_string)
+
             print(response.text, file=sys.stderr)
             os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('result', name=filename))
+            return redirect(url_for('result', name=filename, response=response.text))
     return render_template('index.html')
 
 
 @app.route('/result', methods=['GET', 'POST'])
 def result():
-    a = requests.post(
-        f'http://orchestrateur:8080/transfert_cnn', encoded_string)
+
+    a = request.args.get('response')
+    a = "".join(a)
+    a = literal_eval(a)
+    print(a, sys.stderr)
+    # a = requests.args.get('response')
+
     b = []
+    # print(a, sys.stderr)
+
+    print("a get printeddd---------------", sys.stderr)
+
+    # a = [["100.0", '202483.jpg'], [100.0, "202493.jpg"], [
+    #     100.0, "202523.jpg"], [100.0, "202532.jpg"], [100.0, "202511.jpg"]]
     ratioList = []
     # a = [["99.89", "132108.jpg"], ["99", '143864.jpg'], ['99', '143369.jpg'],
     #      ["98", '191011.jpg'], ["98", '157682.jpg']]
@@ -79,10 +93,19 @@ def result():
     #      ["123458.jpg", 50],
     #      ["123459.jpg", 45],
     #      ["123460.jpg", 40]]
+
     for row in a:
-        b.append(np.asarray(row))
+        b.append(row)
+    print(b, file=sys.stderr)
+    print("--------------------- final B", file=sys.stderr)
+    for image in b:
+        print(image[1])
+
     imageList = os.listdir('static/data')
     imageList = ['data/' + image[1] for image in b]
+    print(imageList)
+    for image in b:
+        print(image[1])
     # for image in a:
     #     print(image[1])
     #     ratioList.append(image[1])
