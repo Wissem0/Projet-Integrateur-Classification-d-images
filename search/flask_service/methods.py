@@ -19,12 +19,12 @@ def knn(k:int, dataset:Dataset, user_vector:Example) -> list[Example]:
     :return: list of neighbors
     """
     k_nearest = []
-    distances = {}
+    # distances = {}
     for vector_id in range(len(dataset)):
         # print("k_nearest: "+str([(nearest[0],dataset.examples[nearest[1]].name) for nearest in k_nearest]))
         vector = dataset.examples[vector_id]
-        d = dataset.sum_weights - Example.hamming_distance(vector, user_vector)
-        distances[vector_id] = d
+        d = dataset.sum_weights - dataset.hamming_distance(vector, user_vector)
+        # distances[vector_id] = d
         if len(k_nearest) < k:
             # print((d, vector_id))
             heapq.heappush(k_nearest, (d, vector_id))
@@ -33,7 +33,9 @@ def knn(k:int, dataset:Dataset, user_vector:Example) -> list[Example]:
 
         # if k_nearest[0] != (40,0) :
             # print("DIFF "+str( k_nearest[0] ))
-    # print("k_nearest final: " + str([(nearest[0], dataset.examples[nearest[1]].name) for nearest in k_nearest]))
+    print("k_nearest final: " + str(k_nearest))
+    for nearest in k_nearest :
+        print( str(nearest[0]), "".join([str(at.attribute) for at in dataset.examples[nearest[1]].attributes] ))
     return [(nearest[0],dataset.examples[nearest[1]].name) for nearest in k_nearest]
 """
 class SearchTree:

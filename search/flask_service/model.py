@@ -2,13 +2,13 @@ class Attribute:
     SYMBOLS = ('0', '1')
     attribute = None
 
-    def __init__(self, attribute: str, weight: int):
+    def __init__(self, attribute: str):
         if attribute in self.SYMBOLS:
-            self.attribute = weight*int(attribute)
+            self.attribute = int(attribute)
         else:
             raise ValueError('Not a valid symbol: \'' + attribute + '\' not in ' + str(self.SYMBOLS))
-        if weight < 0 :
-            raise ValueError('Weight should be non-negative. (weight='+weight+')')
+#        if weight < 0 :
+#            raise ValueError('Weight should be non-negative. (weight='+weight+')')
     def __str__(self) :
         return str(self.attribute)
 
@@ -48,21 +48,13 @@ class Example:
     def __str__(self):
         return str((self.name,self.attributes))
 
-    # Hamming distance
-    def hamming_distance(self, e2) -> int:
-        if len(self) != len(e2):
-            raise ValueError(
-                "Binary vectors should have same length (len<"+self.name+">=" + str(len(self)) + ",len<"+e2.name+">=" + str(len(e2))+")")
-        # return sum( [ int(bit) for bit in bin( Example.get_bin_value(self) ^ Example.get_bin_value(e2) )[2:]] )
-        return abs(sum( [e1a.attribute for e1a in self.attributes])-
-                   sum( [e2a.attribute for e2a in e2.attributes]))
 
 class Dataset:
     examples = []
     features = []
     def __init__(self, features: list[str], examples_init: list[Example],weights:list[int]=[] ):
         self.features = list.copy(features)
-        print("self.features " + str(self.features))
+        # print("self.features " + str(self.features))
         if weights :
             if len(weights) != len(features) :
                 raise ValueError( 'Only '+len(weights)+' weights : '+ str(len(self.features)) + ' required.')
@@ -81,3 +73,15 @@ class Dataset:
             self.examples.append(example)
         else :
             raise ValueError('Example <'+example.name+'> has ' + str(len(example.attributes)) + ' attribute(s): ' + str(len(self.features)) + ' required.')
+
+        # Hamming distance
+    def hamming_distance(self, e1, e2) -> int:
+        if len(e1) != len(e2):
+            raise ValueError("Binary vectors should have same length (len<" + e1.name + ">=" + str( len(e1)) + ",len<" + e2.name + ">=" + str(len(e2)) + ")")
+        xor = []
+        for k in range(len(self.features)) :
+            if e1.attributes[k].attribute == e2.attributes[k].attribute :
+                xor.append(0)
+            else :
+                xor.append(1)
+        return sum([xor[k] * self.weights[k] for k in range(len(self.features))])

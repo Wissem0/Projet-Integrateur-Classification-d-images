@@ -4,6 +4,7 @@ from methods import knn
 from hypothesis import given, strategies as st
 
 # test method knn : image 1 : 0110000000010000001101001001000110101001
+#                             0110000000010000001101001001110110101001
 #                           x 0001012244041114043261111101000211103003'
 
 #                            '0000000000040000003201001001000210103003'
@@ -14,6 +15,7 @@ import os
 
 PATH_TO_CSV = ['list_attr_celeba.csv','../list_attr_celeba.csv','../../list_attr_celeba.csv',]
 weights = [0,0,0,1,0,1,2,2,4,4,0,4,1,1,1,4,0,4,3,2,6,1,1,1,1,1,0,1,0,0,0,2,1,1,1,0,3,0,0,3]
+# weights = [1 for _ in range(40)]
 S_WEIGHTS = sum(weights)
 def generate_example(nb_features: int) -> Example:
     return Example("Random Example",[Attribute(str(random.randint(0, 1)),weights[j]) for j in range(nb_features)])
@@ -37,7 +39,7 @@ def init_test() :
     # weights = [random.randint(1,10) for _ in range(len(features))]
     print("Loading examples with weight "+ str (weights)+"...")
     for raw_example in csvFile.iloc:
-        attributes = [Attribute('0',weights[atr]) if raw_example[1:][atr]==-1 else Attribute('1',weights[atr]) for atr in range(len(raw_example[1:]))]
+        attributes = [Attribute('0') if raw_example[1:][atr]==-1 else Attribute('1') for atr in range(len(raw_example[1:]))]
         # print([str(k) for k in attributes])
         example = Example(raw_example[0],attributes)
         example_list.append(example)
